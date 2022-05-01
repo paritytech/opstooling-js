@@ -1,7 +1,7 @@
 {
   "name": "opstooling-js",
   "description": "opstooling-js",
-  "version": "0.0.2",
+  "version": "0.0.0",
   "author": "Parity <admin@parity.io> (https://parity.io)",
   "license": "Apache-2.0",
   "scripts": {

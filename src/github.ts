@@ -13,8 +13,8 @@ import { Err, Ok } from "./types"
 const wasOctokitExtendedByApplication = Symbol()
 
 /*
-  The extra fields are undocumented endpoints or endpoints which are not
-  available yet on Octokit
+  Those extensions are undocumented endpoints or endpoints which are not yet
+  available on Octokit
 */
 export type ExtendedOctokit = Octokit & {
   users: Octokit["users"] & {

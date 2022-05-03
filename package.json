@@ -7,7 +7,6 @@
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit",
-    "prettier": "prettier --loglevel silent '{*,**/*}.{json,html}'",
     "fix:eslint": "eslint --fix",
     "fix:prettier": "prettier --write",
     "fix": "yarn fix:eslint '{*,**/*}.{cjs,ts}' && yarn fix:prettier '{*,**/*}.json'"

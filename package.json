@@ -9,7 +9,7 @@
     "typecheck": "tsc --noEmit",
     "fix:eslint": "eslint --fix",
     "fix:prettier": "prettier --write",
-    "fix": "yarn fix:eslint '{*,**/*}.{cjs,ts}' && yarn fix:prettier '{*,**/*}.json'"
+    "fix": "yarn fix:eslint '{*,**/*}.{cjs,js,ts}' && yarn fix:prettier '{*,**/*}.json'"
   },
   "main": "./build/index.js",
   "types": "./build/index.d.ts",

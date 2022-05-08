@@ -30,19 +30,11 @@ jobs:
       - name: Build
         run: yarn build
 
-      - name: Prepare release
+      - name: Release
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions"
           git add --force build
           git commit -m v${{ github.event.inputs.version }}
           git tag v${{ github.event.inputs.version }}
-
-      # FIXME: This action pushes *both* the branch and the tag. Ideally it should
-      # push only the tag.
-      - name: Publish release
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: v${{ github.event.inputs.version }}
-          tags: true
+          git push origin v${{ github.event.inputs.version }}

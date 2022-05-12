@@ -90,3 +90,4 @@ export const normalizeValue = (
 ): unknown => {
   return normalizers[typeof value](value, previousObjects)
 }
+/* eslint-enable */

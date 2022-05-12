@@ -101,7 +101,7 @@ export class Logger {
             name: this.options.name,
             context: this.options.context,
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            msg: normalizeValue(item),
+            msg: normalizeValue(item, [], true),
             description,
             extra,
           }),
@@ -118,7 +118,7 @@ export class Logger {
             ? []
             : ["~@ Context:", normalizedContext]),
           ...(extra.length === 0 ? [] : ["~@ Extra:", normalizeValue(extra)]),
-          normalizeValue(item),
+          normalizeValue(item, [], true),
         )
         break
       }

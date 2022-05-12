@@ -7,9 +7,9 @@ This repository hosts shared functionality for
 
 Choose a [tag](https://github.com/paritytech/opstooling-js/tags) and then run
 
-Yarn: `yarn add --dev https://github.com/paritytech/opstooling-js#${TAG_NAME}`
+Yarn: `yarn add https://github.com/paritytech/opstooling-js#${TAG_NAME}`
 
-NPM: `npm install --save-dev https://github.com/paritytech/opstooling-js-style#${TAG_NAME}`
+NPM: `npm install https://github.com/paritytech/opstooling-js-style#${TAG_NAME}`
 
 # Release
 

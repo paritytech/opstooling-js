@@ -198,7 +198,13 @@ export const getOctokit = (
     logger,
     apiEndpoint,
     requestMutex: inputRequestMutex,
-  }: { logger: Logger; apiEndpoint?: string; requestMutex?: Mutex },
+    getAuthHeaders,
+  }: {
+    logger: Logger
+    apiEndpoint?: string
+    requestMutex?: Mutex
+    getAuthHeaders?: () => Promise<{ authorization: string }>
+  },
   octokit?: Octokit,
 ): ExtendedOctokit => {
   octokit ??= new Octokit({
@@ -294,6 +300,11 @@ export const getOctokit = (
       await requestMutex.runExclusive(async () => {
         try {
           await requestDelay
+
+          if (getAuthHeaders) {
+            const authHeaders = await getAuthHeaders()
+            options.headers = { ...options.headers, ...authHeaders }
+          }
 
           for (; triesCount < 3; triesCount++) {
             if (triesCount) {

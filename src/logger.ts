@@ -1,6 +1,6 @@
 import type { FastifyLoggerInstance } from "fastify"
 
-import { normalizeValue } from "./normalizer"
+import { normalizeValue } from "./normalization"
 
 type LoggingImplementation = {
   log: (...args: any[]) => void

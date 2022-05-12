@@ -21,7 +21,11 @@ const normalizers = {
   string: (value: any) => {
     return value
   },
-  object: (value: any, previousObjects: unknown[] = []) => {
+  object: (
+    value: any,
+    previousObjects: unknown[] = [],
+    showTopLevel = false,
+  ) => {
     if (value === null) {
       return
     }
@@ -62,6 +66,8 @@ const normalizers = {
 
     if (Object.keys(output).length > 0) {
       return container
+    } else if (showTopLevel) {
+      return objAsArray ? [] : {}
     }
   },
 }
@@ -87,6 +93,8 @@ const setNormalizedKeyValue = (
 export const normalizeValue = (
   value: unknown,
   previousObjects: unknown[] = [],
+  showTopLevel = false,
 ): unknown => {
-  return normalizers[typeof value](value, previousObjects)
+  return normalizers[typeof value](value, previousObjects, showTopLevel)
 }
+/* eslint-enable */

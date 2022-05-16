@@ -10,6 +10,11 @@ export const ld = deepdash(lodash)
   considering the placement order of internal elements. e.g. for Arrays, [1,2]
   is not considered equal to [2,1] for isEqual and isDeepEqual because the
   elements' order is different.
+
+  `null` and `undefined` entries are do not constitute a difference since
+  entries with those values are considered to be "empty" and therefore not
+  relevant for this comparison.
+
   See the tests in ./comparison.spec.ts for a better idea of how it works in
   practice.
 */
@@ -18,6 +23,12 @@ export const doValuesContainSameData = (v1: unknown, v2: unknown) => {
     return false
   }
 
+  /*
+    Values are normalized in order to exclude "empty entries" (as explained in
+    the documentation for this function) such as from both objects to be
+    compared, otherwise such entries could get in the way of comparing the
+    relevant data within each value
+  */
   v1 = normalizeValue(v1)
   v2 = normalizeValue(v2)
 

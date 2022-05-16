@@ -5,6 +5,14 @@ import { normalizeValue } from "./normalization"
 
 export const ld = deepdash(lodash)
 
+/*
+  This function compares if two objects have the same values within them without
+  considering the placement order of internal elements. e.g. for Arrays, [1,2]
+  is not considered equal to [2,1] for isEqual and isDeepEqual because the
+  elements' order is different.
+  See the tests in ./comparison.spec.ts for a better idea of how it works in
+  practice.
+*/
 export const doValuesContainSameData = (v1: unknown, v2: unknown) => {
   if (typeof v1 !== typeof v2) {
     return false

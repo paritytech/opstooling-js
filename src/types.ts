@@ -1,8 +1,15 @@
 export class Ok<T> {
   constructor(public value: T) {}
 }
+export const ok = <T>(value: T) => {
+  return new Ok(value)
+}
+
 export class Err<T> {
   constructor(public value: T) {}
+}
+export const err = <T>(value: T) => {
+  return new Err(value)
 }
 
 type KeysOfType<T, U> = { [K in keyof T]: T[K] extends U ? K : never }[keyof T]

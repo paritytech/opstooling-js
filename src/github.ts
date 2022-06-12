@@ -29,13 +29,13 @@ export const isGithubOrganizationMember = async (
       return true
     }
     case 302: {
-      logger.error(
+      logger.fatal(
         `Github organization membership API responded with status code ${membershipStatus} which means the bot is not considered an organization member. This should never happen because the bot should already be installed in that organization. It's possible that the bot's credentials were not properly used for this request.`,
       )
       return false
     }
     default: {
-      logger.error(
+      logger.fatal(
         `GitHub organization membership API responded with unexpected status code ${membershipStatus}`,
       )
       return false

@@ -7,9 +7,19 @@ export const validatedFetch = async <T>(
   { decoding }: { decoding: "json" } = { decoding: "json" },
 ) => {
   const body = await (async () => {
+    const result = await response
+
+    if (result.status >= 400) {
+      throw new Error(
+        `Unexpected code: ${result.status}. Url: ${
+          result.url
+        }. Body: ${await result.text()}`,
+      )
+    }
+
     switch (decoding) {
       case "json": {
-        return (await response).json()
+        return result.json()
       }
       default: {
         const exhaustivenessCheck: never = decoding

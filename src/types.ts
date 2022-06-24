@@ -23,3 +23,11 @@ export type ToRequired<T> = {
 }
 
 export type ToOptional<T> = { [K in keyof T]?: T[K] }
+
+export type JSONValue =
+  | string
+  | number
+  | boolean
+  | null
+  | { [key: string]: JSONValue }
+  | JSONValue[]

@@ -1,6 +1,8 @@
 import type { AnySchema } from "joi"
 import fetch from "node-fetch"
 
+import { validate } from "./validation"
+
 export const validatedFetch = async <T>(
   response: ReturnType<typeof fetch>,
   schema: AnySchema,
@@ -28,11 +30,8 @@ export const validatedFetch = async <T>(
       }
     }
   })()
-  const validation = schema.validate(body)
-  if (validation.error) {
-    throw validation.error
-  }
-  return validation.value as T
+
+  return validate<T>(body, schema)
 }
 
 export { fetch }

@@ -1,6 +1,7 @@
 export class Ok<T> {
   constructor(public value: T) {}
 }
+
 export const ok = <T>(value: T) => {
   return new Ok(value)
 }
@@ -8,6 +9,7 @@ export const ok = <T>(value: T) => {
 export class Err<T> {
   constructor(public value: T) {}
 }
+
 export const err = <T>(value: T) => {
   return new Err(value)
 }
@@ -31,3 +33,5 @@ export type JSONValue =
   | null
   | { [key: string]: JSONValue }
   | JSONValue[]
+
+export * from "./types/generated"

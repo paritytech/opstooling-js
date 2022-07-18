@@ -3,6 +3,7 @@ repos:
     rev: v2.4.0
     hooks:
       - id: trailing-whitespace
+        args: [ "--markdown-linebreak-ext=md" ]
       - id: end-of-file-fixer
   - repo: local
     hooks:
@@ -12,13 +13,13 @@ repos:
         language: node
         files: \.[^\.]*(t|j)s$
         exclude: env.cjs
-        args: ["--quiet"]
+        args: [ "--quiet" ]
       - id: prettier
         name: prettier
         entry: node_modules/.bin/prettier
         language: node
         files: \.(html|json)$
-        args: ["--check"]
+        args: [ "--check" ]
       - id: typecheck
         name: typecheck
         entry: node_modules/.bin/tsc-files

@@ -6,11 +6,15 @@
   "license": "Apache-2.0",
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts --clean",
-    "typecheck": "tsc --noEmit",
+    "fix": "yarn fix:eslint '{*,**/*}.{cjs,js,ts}' && yarn fix:prettier '{*,**/*}.json'",
     "fix:eslint": "eslint --fix",
     "fix:prettier": "prettier --write",
+    "generate-types": "./src/cli/opstooling-scripts.cjs generate-types --schemas src/schemas --out src/types/generated",
     "test": "jest",
-    "fix": "yarn fix:eslint '{*,**/*}.{cjs,js,ts}' && yarn fix:prettier '{*,**/*}.json'"
+    "typecheck": "tsc --noEmit"
+  },
+  "bin": {
+    "opstooling-scripts": "./src/cli/opstooling-scripts.cjs"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -39,10 +43,14 @@
   "dependencies": {
     "@octokit/rest": "^18.12.0",
     "async-mutex": "^0.3.2",
+    "commander": "^9.3.0",
     "deepdash": "^5.3.9",
     "joi": "^17.6.0",
+    "joi-to-typescript": "^4.0.5",
     "lodash": "^4.17.21",
     "node-fetch": "^3.2.4",
-    "probot": "^12.2.2"
+    "probot": "^12.2.2",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.0.0"
   }
 }

@@ -1,4 +1,5 @@
 import type { FastifyLoggerInstance } from "fastify"
+import { inspect } from "util"
 
 import { normalizeValue } from "./normalization"
 
@@ -15,6 +16,7 @@ enum LoggingLevel {
   error,
   fatal,
 }
+
 type LoggingLevels = keyof typeof LoggingLevel
 
 export class Logger {
@@ -130,6 +132,15 @@ export class Logger {
     }
   }
 
+  fmt(item: unknown): string {
+    return inspect(item, {
+      showHidden: false,
+      depth: null,
+      maxArrayLength: null,
+      sorted: true,
+    })
+  }
+
   private loggerCallback(level: LoggingLevels) {
     return <T = string>(
       item: unknown,
@@ -139,6 +150,7 @@ export class Logger {
       return this.log(level, item, description, ...extra)
     }
   }
+
   info = this.loggerCallback("info")
   warn = this.loggerCallback("warn")
   error = this.loggerCallback("error")

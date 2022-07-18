@@ -1,4 +1,4 @@
-import { execSync } from "child_process"
+import { execFileSync } from "child_process"
 import { program } from "commander"
 import { convertFromDirectory } from "joi-to-typescript"
 
@@ -27,7 +27,7 @@ program
       if (options.prettier) {
         ctx.logger.info("Applying prettier to generated files")
 
-        execSync(`prettier --write "${options.out}"`)
+        execFileSync("prettier", ["--write", options.out], { stdio: "inherit" })
       }
 
       ctx.logger.info("Done")

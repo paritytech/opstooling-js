@@ -9,12 +9,12 @@
     "fix": "yarn fix:eslint '{*,**/*}.{cjs,js,ts}' && yarn fix:prettier '{*,**/*}.json'",
     "fix:eslint": "eslint --fix",
     "fix:prettier": "prettier --write",
-    "generate-types": "./src/cli/opstooling-scripts.sh generate-types --schemas src/schemas --out src/types/generated",
+    "generate-types": "./src/cli/opstooling-scripts.cjs generate-types --schemas src/schemas --out src/types/generated",
     "test": "jest",
     "typecheck": "tsc --noEmit"
   },
   "bin": {
-    "opstooling-scripts": "./src/cli/opstooling-scripts.sh"
+    "opstooling-scripts": "./src/cli/opstooling-scripts.cjs"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

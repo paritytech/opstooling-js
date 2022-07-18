@@ -20,7 +20,7 @@ which will create a tag with the version passed as input.
 
 This package adds `opstooling-scripts` executable, which is "umbrella" for arbitrary subcommands that we might want to share across projects.  
 
-See `opstooling-scripts -h` to get a list of available commands, also check out `src/cli` directory for sources 
+See `opstooling-scripts -h` to get a list of available commands, also check out `src/cli` directory for sources
 
 ### Adding new CLI command
 * define new command in `src/cli/commands`, use existing ones as example

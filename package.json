@@ -49,7 +49,7 @@
     "joi-to-typescript": "^4.0.5",
     "lodash": "^4.17.21",
     "node-fetch": "^3.2.4",
-    "probot": "^12.2.2",
+    "probot": "^12.2.8",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.0.0"
   }

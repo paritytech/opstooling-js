@@ -18,3 +18,15 @@ export const getFreeId = () => {
     },
   }
 }
+
+export function ensureDefined<T>(
+  input: T | undefined | null,
+  message?: string,
+): NonNullable<T> {
+  if (input === undefined || input === null) {
+    throw new Error(
+      message ?? `Expected input to be defined, got ${String(input)}`,
+    )
+  }
+  return input as NonNullable<T>
+}

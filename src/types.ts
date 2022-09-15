@@ -34,4 +34,6 @@ export type JSONValue =
   | { [key: string]: JSONValue }
   | JSONValue[]
 
+export type MaybePromise<T> = T | Promise<T>
+
 export * from "./types/generated"

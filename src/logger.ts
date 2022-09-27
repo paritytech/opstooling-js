@@ -4,8 +4,8 @@ import { inspect } from "util"
 import { normalizeValue } from "./normalization"
 
 type LoggingImplementation = {
-  log: (...args: any[]) => void
-  error: (...args: any[]) => void
+  log: (...args: unknown[]) => void
+  error: (...args: unknown[]) => void
 }
 
 enum LoggingLevel {
@@ -26,7 +26,7 @@ export class Logger {
       logFormat: "json" | null
       minLogLevel: LoggingLevels
       impl: LoggingImplementation
-      context?: Record<string, any>
+      context?: Record<string, unknown>
     },
   ) {}
 

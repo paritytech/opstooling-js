@@ -3,12 +3,12 @@ import { inspect } from "util"
 
 import { normalizeValue } from "./normalization"
 
-type LoggingImplementation = {
-  log: (...args: any[]) => void
-  error: (...args: any[]) => void
+export type LoggingImplementation = {
+  log: (...args: unknown[]) => void
+  error: (...args: unknown[]) => void
 }
 
-enum LoggingLevel {
+export enum LoggingLevel {
   trace,
   debug,
   info,
@@ -17,18 +17,16 @@ enum LoggingLevel {
   fatal,
 }
 
-type LoggingLevels = keyof typeof LoggingLevel
-
+export type LoggingLevels = keyof typeof LoggingLevel
+export type LoggerOptions = {
+  name: string
+  logFormat: "json" | null
+  minLogLevel: LoggingLevels
+  impl: LoggingImplementation | Console
+  context?: Record<string, unknown>
+}
 export class Logger {
-  constructor(
-    public options: {
-      name: string
-      logFormat: "json" | null
-      minLogLevel: LoggingLevels
-      impl: LoggingImplementation
-      context?: Record<string, any>
-    },
-  ) {}
+  constructor(public options: LoggerOptions) {}
 
   getFastifyLogger(): FastifyLoggerInstance {
     return {
@@ -42,7 +40,7 @@ export class Logger {
     }
   }
 
-  child(context: Record<string, unknown>) {
+  child(context: Record<string, unknown>): Logger {
     /*
       Adjust keys in order to prevent overriding existing data in the context
       with the same key
@@ -70,7 +68,7 @@ export class Logger {
     item: unknown,
     description?: T,
     ...extra: unknown[]
-  ) {
+  ): undefined | (() => void) {
     if (LoggingLevel[level] < LoggingLevel[this.options.minLogLevel]) {
       return
     }

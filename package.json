@@ -5,16 +5,16 @@
   "author": "Parity <admin@parity.io> (https://parity.io)",
   "license": "Apache-2.0",
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "build": "tsup --entry src/index.ts --entry src/cli/main.ts --format cjs,esm --dts --clean",
     "fix": "yarn fix:eslint '{*,**/*}.{cjs,js,ts}' && yarn fix:prettier '{*,**/*}.json'",
     "fix:eslint": "eslint --fix",
     "fix:prettier": "prettier --write",
-    "generate-types": "./src/cli/opstooling-scripts.cjs generate-types --schemas src/schemas --out src/types/generated",
+    "generate-types": "src/cli/opstooling-scripts.cjs.bak generate-types --schemas src/schemas --out src/types/generated",
     "test": "jest",
     "typecheck": "tsc --noEmit"
   },
   "bin": {
-    "opstooling-scripts": "./src/cli/opstooling-scripts.cjs"
+    "opstooling-scripts": "dist/cli/main.js"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -40,7 +40,7 @@
     "jest": "^28.1.0",
     "opstooling-js-style": "https://github.com/paritytech/opstooling-js-style#c5003bcb6febd8872179c278b08704137ab9b509",
     "ts-jest": "^28.0.2",
-    "tsup": "^5.12.7",
+    "tsup": "v6.3.0",
     "typescript": "4.6.3"
   },
   "dependencies": {
@@ -52,8 +52,8 @@
     "joi-to-typescript": "^4.0.5",
     "lodash": "^4.17.21",
     "node-fetch": "^3.2.10",
-    "probot": "^12.2.8",
     "prettier": "^2.7.1",
+    "probot": "^12.2.8",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.0.0"
   }

@@ -5,7 +5,8 @@ import { convertFromDirectory } from "joi-to-typescript"
 import { runMain } from "src/cli/utils"
 
 program
-  .description("Generate types from Joi schemas")
+  .command("generate-types")
+  .description("Generate type definitions from Joi schemas")
   .requiredOption("--schemas <schema-dir>", "path to directory containing Joi schemas")
   .requiredOption("--out <out-dir>", "path to generated types directory")
   .option("--no-prettier", "apply prettier to generated files", true)
@@ -30,4 +31,3 @@ program
       ctx.logger.info("Done")
     }),
   )
-  .parse()

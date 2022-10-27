@@ -6,14 +6,11 @@ import { runMain } from "src/cli/utils"
 
 program
   .description("Generate types from Joi schemas")
-  .requiredOption(
-    "--schemas <schema-dir>",
-    "path to directory containing Joi schemas",
-  )
+  .requiredOption("--schemas <schema-dir>", "path to directory containing Joi schemas")
   .requiredOption("--out <out-dir>", "path to generated types directory")
   .option("--no-prettier", "apply prettier to generated files", true)
-  .action((options: { schemas: string; out: string; prettier: boolean }) => {
-    return runMain(async (ctx) => {
+  .action((options: { schemas: string; out: string; prettier: boolean }) =>
+    runMain(async (ctx) => {
       ctx.logger.info("Generating types")
 
       await convertFromDirectory({
@@ -31,6 +28,6 @@ program
       }
 
       ctx.logger.info("Done")
-    })
-  })
+    }),
+  )
   .parse()

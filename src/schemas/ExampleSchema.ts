@@ -4,8 +4,5 @@ import Joi from "joi"
 
 export const ExampleSchema = Joi.object({
   foo: Joi.string().allow("foo", "bar", "baz"),
-  flags: Joi.object({
-    required: Joi.boolean().required(),
-    optional: Joi.boolean().allow(null),
-  }).required(),
+  flags: Joi.object({ required: Joi.boolean().required(), optional: Joi.boolean().allow(null) }).required(),
 }).meta({ className: "Example" })

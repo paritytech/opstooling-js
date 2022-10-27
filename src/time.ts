@@ -1,10 +1,9 @@
 import { MaybePromise } from "./types"
 
-export const delay = (milliseconds: number) => {
-  return new Promise<void>((resolve) => {
+export const delay = (milliseconds: number): Promise<void> =>
+  new Promise<void>((resolve) => {
     setTimeout(resolve, milliseconds)
   })
-}
 
 export async function until(
   cb: () => MaybePromise<boolean>,

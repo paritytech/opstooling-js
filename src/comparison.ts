@@ -18,7 +18,7 @@ export const ld = deepdash(lodash)
   See the tests in ./comparison.spec.ts for a better idea of how it works in
   practice.
 */
-export const doValuesContainSameData = (v1: unknown, v2: unknown) => {
+export const doValuesContainSameData = (v1: unknown, v2: unknown): boolean => {
   if (typeof v1 !== typeof v2) {
     return false
   }
@@ -62,10 +62,7 @@ export const doValuesContainSameData = (v1: unknown, v2: unknown) => {
 
         const targetValue = ld.get(target, path) as unknown
 
-        if (
-          typeof sourceValue !== "object" ||
-          typeof targetValue !== "object"
-        ) {
+        if (typeof sourceValue !== "object" || typeof targetValue !== "object") {
           return sourceValue !== targetValue
         }
 
@@ -74,11 +71,7 @@ export const doValuesContainSameData = (v1: unknown, v2: unknown) => {
             return true
           }
           for (const leftVal of sourceValue) {
-            if (
-              targetValue.find((rightVal) => {
-                return doValuesContainSameData(leftVal, rightVal)
-              }) === undefined
-            ) {
+            if (targetValue.find((rightVal) => doValuesContainSameData(leftVal, rightVal)) === undefined) {
               return true
             }
           }

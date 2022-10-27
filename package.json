@@ -38,7 +38,7 @@
     "@types/node-fetch": "^2.6.1",
     "fastify": "^3.29.0",
     "jest": "^28.1.0",
-    "opstooling-js-style": "https://github.com/paritytech/opstooling-js-style#6cfdf3caaacd483d330b9ab534625fe33adb26b5",
+    "opstooling-js-style": "https://github.com/paritytech/opstooling-js-style#c5003bcb6febd8872179c278b08704137ab9b509",
     "ts-jest": "^28.0.2",
     "tsup": "^5.12.7",
     "typescript": "4.6.3"

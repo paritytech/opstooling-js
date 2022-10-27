@@ -6,14 +6,11 @@ export const isGithubOrganizationMember = async (
   octokit: ExtendedOctokit,
   organization: { id: number },
   user: { login: string },
-) => {
+): Promise<boolean> => {
   const membershipStatus = await (async () => {
     try {
       return (
-        await octokit.orgs.userMembershipByOrganizationId({
-          organization_id: organization.id,
-          username: user.login,
-        })
+        await octokit.orgs.userMembershipByOrganizationId({ organization_id: organization.id, username: user.login })
       ).status as number
     } catch (error) {
       logger.error(error, "GitHub membership request failed")
@@ -35,9 +32,7 @@ export const isGithubOrganizationMember = async (
       return false
     }
     default: {
-      logger.fatal(
-        `GitHub organization membership API responded with unexpected status code ${membershipStatus}`,
-      )
+      logger.fatal(`GitHub organization membership API responded with unexpected status code ${membershipStatus}`)
       return false
     }
   }

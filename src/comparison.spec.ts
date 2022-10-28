@@ -17,22 +17,10 @@ describe("doValuesContainSameData", () => {
   })
 
   it("Values contain same data for nested objects inside arrays", () => {
-    equal(
-      doValuesContainSameData(
-        { a: [{ b: 1 }, { a: 2 }] },
-        { a: [{ a: 2 }, { b: 1 }] },
-      ),
-      true,
-    )
+    equal(doValuesContainSameData({ a: [{ b: 1 }, { a: 2 }] }, { a: [{ a: 2 }, { b: 1 }] }), true)
   })
 
   it("Values contain same data for nested objects", () => {
-    equal(
-      doValuesContainSameData(
-        { a: { b: 1 }, c: { d: 1 } },
-        { c: { d: 1 }, a: { b: 1 } },
-      ),
-      true,
-    )
+    equal(doValuesContainSameData({ a: { b: 1 }, c: { d: 1 } }, { c: { d: 1 }, a: { b: 1 } }), true)
   })
 })

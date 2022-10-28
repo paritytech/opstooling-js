@@ -7,13 +7,6 @@ const mainScript = path.join(__dirname, "main.ts")
 
 childProcess.execFileSync(
   process.argv[0],
-  [
-    "-r",
-    "ts-node/register/transpile-only",
-    "-r",
-    "tsconfig-paths/register",
-    mainScript,
-    ...process.argv.slice(2),
-  ],
+  ["-r", "ts-node/register/transpile-only", "-r", "tsconfig-paths/register", mainScript, ...process.argv.slice(2)],
   { cwd: root, stdio: "inherit" },
 )

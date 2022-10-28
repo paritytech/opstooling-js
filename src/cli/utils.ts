@@ -5,7 +5,7 @@ import { Logger } from "src/logger"
 
 export type CliContext = { logger: Logger }
 
-export const runMain = (cb: (ctx: CliContext) => Promise<void>) => {
+export const runMain = (cb: (ctx: CliContext) => Promise<void>): void => {
   const logger = new Logger({
     name: "opstooling-scripts",
     impl: console,

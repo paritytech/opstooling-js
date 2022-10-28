@@ -34,9 +34,7 @@ export class Logger {
       debug: this.loggerCallback("debug"),
       trace: this.loggerCallback("trace"),
       fatal: this.loggerCallback("fatal"),
-      child: (context: Record<string, unknown>) => {
-        return this.child(context).getFastifyLogger()
-      },
+      child: (context: Record<string, unknown>) => this.child(context).getFastifyLogger(),
     }
   }
 
@@ -57,18 +55,11 @@ export class Logger {
     }
     return new Logger({
       ...this.options,
-      context: currentContextKeys.length
-        ? { ...this.options.context, ...adjustedContext }
-        : undefined,
+      context: currentContextKeys.length ? { ...this.options.context, ...adjustedContext } : undefined,
     })
   }
 
-  log<T = string>(
-    level: LoggingLevels,
-    item: unknown,
-    description?: T,
-    ...extra: unknown[]
-  ): undefined | (() => void) {
+  log<T = string>(level: LoggingLevels, item: unknown, description?: T, ...extra: unknown[]): undefined | (() => void) {
     if (LoggingLevel[level] < LoggingLevel[this.options.minLogLevel]) {
       return
     }
@@ -114,9 +105,7 @@ export class Logger {
         loggingFunction(
           tag,
           ...(description === undefined ? [] : [description]),
-          ...(normalizedContext === undefined
-            ? []
-            : ["~@ Context:", normalizedContext]),
+          ...(normalizedContext === undefined ? [] : ["~@ Context:", normalizedContext]),
           ...(extra.length === 0 ? [] : ["~@ Extra:", normalizeValue(extra)]),
           normalizeValue(item, [], true),
         )
@@ -131,22 +120,12 @@ export class Logger {
   }
 
   fmt(item: unknown): string {
-    return inspect(item, {
-      showHidden: false,
-      depth: null,
-      maxArrayLength: null,
-      sorted: true,
-    })
+    return inspect(item, { showHidden: false, depth: null, maxArrayLength: null, sorted: true })
   }
 
   private loggerCallback(level: LoggingLevels) {
-    return <T = string>(
-      item: unknown,
-      description?: T,
-      ...extra: unknown[]
-    ) => {
-      return this.log(level, item, description, ...extra)
-    }
+    return <T = string>(item: unknown, description?: T, ...extra: unknown[]) =>
+      this.log(level, item, description, ...extra)
   }
 
   info = this.loggerCallback("info")

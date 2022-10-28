@@ -5,11 +5,7 @@ type Options = {
   message?: string
 }
 
-export function validate<T>(
-  item: unknown,
-  schema: Joi.Schema,
-  options: Options = {},
-): T {
+export function validate<T>(item: unknown, schema: Joi.Schema, options: Options = {}): T {
   const joiOpts = { allowUnknown: true, abortEarly: false, convert: true }
 
   if (options.message) {

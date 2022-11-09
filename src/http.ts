@@ -1,16 +1,21 @@
 import Joi from "joi"
-import fetch from "node-fetch"
+import fetch, { RequestInfo, RequestInit } from "node-fetch"
 
 import { validate } from "./validation"
 
-export const validatedFetch = async <T>(
-  response: ReturnType<typeof fetch>,
-  schema: Joi.Schema<T>,
-  { decoding }: { decoding: "json" } = { decoding: "json" },
-): Promise<T> => {
-  const body: unknown = await (async () => {
-    const result = await response
+export type ValidatedFetchParams = {
+  decoding: "json"
+  init?: RequestInit
+}
 
+export const validatedFetch = async <T>(
+  url: RequestInfo,
+  schema: Joi.Schema<T>,
+  { decoding, init }: ValidatedFetchParams = { decoding: "json" },
+): Promise<T> => {
+  const result = await fetch(url, init)
+
+  const body: unknown = await (async () => {
     if (result.status >= 400) {
       throw new Error(`Unexpected code: ${result.status}. Url: ${result.url}. Body: ${await result.text()}`)
     }
@@ -29,5 +34,3 @@ export const validatedFetch = async <T>(
 
   return validate<T>(body, schema)
 }
-
-export { fetch }

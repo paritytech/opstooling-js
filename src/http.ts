@@ -1,26 +1,33 @@
 import Joi from "joi"
-import fetch from "node-fetch"
+import fetch, { RequestInfo, RequestInit } from "node-fetch"
 
 import { validate } from "./validation"
 
-export const validatedFetch = async <T>(
-  response: ReturnType<typeof fetch>,
-  schema: Joi.Schema<T>,
-  { decoding }: { decoding: "json" } = { decoding: "json" },
-): Promise<T> => {
-  const body: unknown = await (async () => {
-    const result = await response
+export type ValidatedFetchParams = {
+  decoding?: "json"
+  init?: RequestInit
+}
 
+export const validatedFetch = async <T>(
+  url: RequestInfo,
+  schema: Joi.Schema<T>,
+  { decoding, init }: ValidatedFetchParams = {},
+): Promise<T> => {
+  const result = await fetch(url, init)
+
+  const body: unknown = await (async () => {
     if (result.status >= 400) {
       throw new Error(`Unexpected code: ${result.status}. Url: ${result.url}. Body: ${await result.text()}`)
     }
 
-    switch (decoding) {
+    const actualDecoding = decoding ?? "json"
+
+    switch (actualDecoding) {
       case "json": {
         return await result.json()
       }
       default: {
-        const exhaustivenessCheck: never = decoding
+        const exhaustivenessCheck: never = actualDecoding
         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         throw new Error(`Not exhaustive: ${exhaustivenessCheck}`)
       }
@@ -29,5 +36,3 @@ export const validatedFetch = async <T>(
 
   return validate<T>(body, schema)
 }
-
-export { fetch }

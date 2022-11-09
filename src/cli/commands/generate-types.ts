@@ -7,7 +7,10 @@ import { runMain } from "src/cli/utils"
 program
   .command("generate-types")
   .description("Generate type definitions from Joi schemas")
-  .requiredOption("--schemas <schema-dir>", "path to directory containing Joi schemas")
+  .requiredOption(
+    "--schemas <schema-dir>",
+    "path to directory containing Joi schemas. Expected to be in `dist` with schemas as .js files",
+  )
   .requiredOption("--out <out-dir>", "path to generated types directory")
   .option("--no-prettier", "apply prettier to generated files", true)
   .action((options: { schemas: string; out: string; prettier: boolean }) =>
@@ -19,7 +22,7 @@ program
         indexAllToRoot: true,
         schemaFileSuffix: "Schema",
         typeOutputDirectory: options.out,
-        debug: true,
+        inputFileFilter: /.*(Schema\.js)$/,
       })
 
       if (options.prettier) {

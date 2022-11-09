@@ -1,14 +1,14 @@
-import type { AnySchema } from "joi"
+import Joi from "joi"
 import fetch from "node-fetch"
 
 import { validate } from "./validation"
 
 export const validatedFetch = async <T>(
   response: ReturnType<typeof fetch>,
-  schema: AnySchema,
+  schema: Joi.Schema<T>,
   { decoding }: { decoding: "json" } = { decoding: "json" },
 ): Promise<T> => {
-  const body = await (async () => {
+  const body: unknown = await (async () => {
     const result = await response
 
     if (result.status >= 400) {

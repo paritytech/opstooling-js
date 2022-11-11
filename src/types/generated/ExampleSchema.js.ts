@@ -5,8 +5,8 @@
 
 export interface Example {
   flags: {
-    optional?: boolean | null
-    required: boolean
-  }
-  foo?: "foo" | "bar" | "baz"
+    optional?: boolean | null;
+    required: boolean;
+  };
+  foo?: "foo" | "bar" | "baz";
 }

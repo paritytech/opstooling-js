@@ -1,9 +1,9 @@
-import { MaybePromise } from "./types"
+import { MaybePromise } from "./types";
 
 export const delay = (milliseconds: number): Promise<void> =>
   new Promise<void>((resolve) => {
-    setTimeout(resolve, milliseconds)
-  })
+    setTimeout(resolve, milliseconds);
+  });
 
 export async function until(
   cb: () => MaybePromise<boolean>,
@@ -11,16 +11,16 @@ export async function until(
   maxRetries: number = Infinity,
   timeoutMessage?: string,
 ): Promise<void> {
-  let retryCount: number = 0
+  let retryCount: number = 0;
 
   while (retryCount < maxRetries) {
-    const res = await cb()
+    const res = await cb();
     if (res) {
-      return
+      return;
     }
-    await delay(interval)
-    retryCount++
+    await delay(interval);
+    retryCount++;
   }
 
-  throw new Error(timeoutMessage ?? "Maximun retry count reached")
+  throw new Error(timeoutMessage ?? "Maximun retry count reached");
 }

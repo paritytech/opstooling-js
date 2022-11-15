@@ -1,9 +1,9 @@
-import { program } from "commander"
+import { program } from "commander";
 
-import { displayError } from "src/error"
-import { Logger } from "src/logger"
+import { displayError } from "src/error";
+import { Logger } from "src/logger";
 
-export type CliContext = { logger: Logger }
+export type CliContext = { logger: Logger };
 
 export const runMain = (cb: (ctx: CliContext) => Promise<void>): void => {
   const logger = new Logger({
@@ -11,11 +11,11 @@ export const runMain = (cb: (ctx: CliContext) => Promise<void>): void => {
     impl: console,
     minLogLevel: process.env.DEBUG ? "debug" : "info",
     logFormat: null,
-  })
+  });
 
-  const ctx: CliContext = { logger }
+  const ctx: CliContext = { logger };
 
   cb(ctx).catch((err) => {
-    program.error(displayError(err), { exitCode: 1 })
-  })
-}
+    program.error(displayError(err), { exitCode: 1 });
+  });
+};

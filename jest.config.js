@@ -1,12 +1,7 @@
-const path = require("path")
-
-const conf = {
-  rootDir: __dirname,
+module.exports = {
+  roots: ["./src"],
   preset: "ts-jest",
   testEnvironment: "node",
-  moduleNameMapper: { "^(src)/(.*)": `${__dirname}/$1/$2` },
-  testRegex: `^${__dirname}/src/.*\\.spec\\.ts$`.split("/").join("\\/"),
-  globals: { "ts-jest": { tsconfig: path.join(__dirname, "tsconfig.json") } },
-}
-
-module.exports = conf
+  transform: { "\\.(ts|js)x?$": ["ts-jest", { useESM: true }] },
+  moduleNameMapper: { "^src/(.*)$": `${process.cwd()}/src/$1` },
+};

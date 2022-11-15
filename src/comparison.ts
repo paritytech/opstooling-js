@@ -1,9 +1,9 @@
-import deepdash from "deepdash"
-import lodash from "lodash"
+import deepdash from "deepdash";
+import lodash from "lodash";
 
-import { normalizeValue } from "./normalization"
+import { normalizeValue } from "./normalization";
 
-export const ld = deepdash(lodash)
+export const ld = deepdash(lodash);
 
 /*
   This function compares if two objects have the same values within them without
@@ -20,7 +20,7 @@ export const ld = deepdash(lodash)
 */
 export const doValuesContainSameData = (v1: unknown, v2: unknown): boolean => {
   if (typeof v1 !== typeof v2) {
-    return false
+    return false;
   }
 
   /*
@@ -29,58 +29,58 @@ export const doValuesContainSameData = (v1: unknown, v2: unknown): boolean => {
     compared, otherwise such entries could get in the way of comparing the
     relevant data within each value
   */
-  v1 = normalizeValue(v1)
-  v2 = normalizeValue(v2)
+  v1 = normalizeValue(v1);
+  v2 = normalizeValue(v2);
 
-  type ArrayPath = (string | number)[]
-  const comparedPaths: ArrayPath[] = []
+  type ArrayPath = (string | number)[];
+  const comparedPaths: ArrayPath[] = [];
 
   const isSomeKeyDifferent = (source: unknown, target: unknown) => {
     if (typeof source !== "object" || typeof target !== "object") {
-      return source === target
+      return source === target;
     }
 
     return ld.someDeep(
       source,
       (sourceValue, _, __, ctx) => {
-        const { path } = ctx as { path: ArrayPath | undefined }
+        const { path } = ctx as { path: ArrayPath | undefined };
         if (path === undefined) {
-          return
+          return;
         }
 
         for (const prevPath of comparedPaths) {
-          let matches = 0
+          let matches = 0;
           for (let i = 0; i < prevPath.length; i++) {
             if (prevPath[i] === path[i]) {
-              matches++
+              matches++;
             }
           }
           if (matches === prevPath.length) {
-            return
+            return;
           }
         }
 
-        const targetValue = ld.get(target, path) as unknown
+        const targetValue = ld.get(target, path) as unknown;
 
         if (typeof sourceValue !== "object" || typeof targetValue !== "object") {
-          return sourceValue !== targetValue
+          return sourceValue !== targetValue;
         }
 
         if (Array.isArray(sourceValue) || Array.isArray(targetValue)) {
           if (!Array.isArray(sourceValue) || !Array.isArray(targetValue)) {
-            return true
+            return true;
           }
           for (const leftVal of sourceValue) {
             if (targetValue.find((rightVal) => doValuesContainSameData(leftVal, rightVal)) === undefined) {
-              return true
+              return true;
             }
           }
-          comparedPaths.push(path)
+          comparedPaths.push(path);
         }
       },
       { leavesOnly: false, pathFormat: "array", includeRoot: false },
-    )
-  }
+    );
+  };
 
-  return !isSomeKeyDifferent(v1, v2) && !isSomeKeyDifferent(v2, v1)
-}
+  return !isSomeKeyDifferent(v1, v2) && !isSomeKeyDifferent(v2, v1);
+};

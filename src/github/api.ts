@@ -1,4 +1,4 @@
-const commitsByRepositoryIdEndpoint = "/repositories/:repository_id/commits"
+const commitsByRepositoryIdEndpoint = "/repositories/:repository_id/commits";
 
 export const githubApiEndpoints = {
   commitsByRepositoryId: commitsByRepositoryIdEndpoint,
@@ -13,4 +13,4 @@ export const githubApiEndpoints = {
   branchCommitsByRepositoryId: `${commitsByRepositoryIdEndpoint}?sha=:branch`,
   userPermissionsByRepositoryId: "/repositories/:repository_id/collaborators/:username/permission",
   userMembershipByOrganizationId: "/organizations/:organization_id/members/:username",
-}
+};

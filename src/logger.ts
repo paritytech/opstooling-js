@@ -128,6 +128,7 @@ export class Logger {
       this.log(level, item, description, ...extra);
   }
 
+  debug = this.loggerCallback("debug");
   info = this.loggerCallback("info");
   warn = this.loggerCallback("warn");
   error = this.loggerCallback("error");

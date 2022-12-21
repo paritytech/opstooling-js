@@ -11,6 +11,7 @@
     "fix:eslint": "eslint --fix",
     "fix:prettier": "prettier --write",
     "generate-types": "node ./dist/cli/main.js generate-types --schemas dist/schemas --out src/types/generated",
+    "prepare": "ts-patch install -s",
     "test": "jest",
     "typecheck": "tsc --noEmit"
   },

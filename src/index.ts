@@ -5,6 +5,7 @@ export * from "./format";
 export * from "./github";
 export * from "./http";
 export * from "./logger";
+export * from "./net";
 export * from "./normalization";
 export * from "./shell";
 export * from "./time";

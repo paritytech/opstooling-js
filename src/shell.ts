@@ -1,9 +1,11 @@
 import { ChildProcess, spawn } from "child_process";
 import { randomUUID } from "crypto";
+import { promises as fs } from "fs";
 import { Readable as ReadableStream } from "stream";
 
 import { redact } from "./format";
 import { Logger } from "./logger";
+import { delay, until } from "./time";
 
 export const displayShellCommand = (
   execPath: string,
@@ -55,7 +57,7 @@ export const getShellCommandRunner = (
       const itemsToRedact = [...(initialConfiguration.itemsToRedact ?? []), ...(configuration.itemsToRedact ?? [])];
 
       const commandDisplayed = displayShellCommand(execPath, args, { itemsToRedact });
-      logger.info(`Executing command ${commandDisplayed}`);
+      logger.info(`Executing command "${commandDisplayed}"`);
 
       const child = spawn(execPath, args, { cwd, stdio: "pipe" });
       if (onChild) {
@@ -84,10 +86,14 @@ export const getShellCommandRunner = (
       child.stderr.on("data", getStreamHandler("stderr"));
 
       child.on("close", (exitCode, signal) => {
-        logger.info(`Process finished with exit code ${exitCode ?? "??"}${signal ? `and signal ${signal}` : ""}`);
+        logger.info(
+          `Process "${commandDisplayed}" finished with exit code ${exitCode ?? "??"}${
+            signal ? `and signal ${signal}` : ""
+          }`,
+        );
 
         if (signal) {
-          return resolve(new Error(`Process got terminated by signal ${signal}`));
+          return resolve(new Error(`Process "${commandDisplayed}" got terminated by signal ${signal}`));
         }
 
         if (exitCode) {
@@ -125,3 +131,40 @@ export const getShellCommandRunner = (
       });
     });
 };
+
+export async function killAndWait(cp: ChildProcess, signal?: NodeJS.Signals | number): Promise<void> {
+  const p = new Promise((resolve) => cp.on("exit", resolve));
+  cp.kill(signal ?? "SIGTERM");
+  await Promise.race([until(() => cp.exitCode !== null, 100), p]);
+}
+
+export async function writePidfile(cp: ChildProcess, path: string): Promise<void> {
+  if (cp.pid === undefined) {
+    throw new Error("Can't write pidfile, .pid is undefined");
+  }
+  await fs.writeFile(path, String(cp.pid));
+}
+
+export async function ensureDeadByPidfile(path: string, signal: NodeJS.Signals = "SIGTERM"): Promise<void> {
+  const pidfileContents: string | undefined = await fs.readFile(path, "utf8").catch((err) => {
+    if (err.code === "ENOENT") return undefined;
+    throw err;
+  });
+
+  if (!pidfileContents) return;
+
+  const pid = parseInt(pidfileContents, 10);
+  if (isNaN(pid)) {
+    throw new Error(`Can not get numeric pid from following contents: ${pidfileContents}`);
+  }
+
+  // TODO: make this configurable if needed
+  for (let i = 0; i < 10; i++) {
+    try {
+      process.kill(pid, signal);
+    } catch (e) {
+      break;
+    }
+    await delay(250);
+  }
+}

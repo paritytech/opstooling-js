@@ -3,6 +3,8 @@
 This repository hosts shared functionality for
 [OpsTooling](https://github.com/orgs/paritytech/teams/opstooling) projects.
 
+![GitHub Issue Sync](https://github.com/paritytech/opstooling-js/actions/workflows/github-issue-sync.yml/badge.svg)
+
 # Installation
 
 Choose a [tag](https://github.com/paritytech/opstooling-js/tags) and then run

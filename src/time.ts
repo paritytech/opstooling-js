@@ -22,5 +22,5 @@ export async function until(
     retryCount++;
   }
 
-  throw new Error(timeoutMessage ?? "Maximun retry count reached");
+  throw new Error(timeoutMessage ?? "Maximum retry count reached");
 }

@@ -52,7 +52,6 @@
     "joi": "^17.6.4",
     "joi-to-typescript": "^4.0.5",
     "lodash": "^4.17.21",
-    "node-fetch": "^2.6.7",
-    "probot": "^12.2.8"
+    "node-fetch": "^2.6.7"
   }
 }

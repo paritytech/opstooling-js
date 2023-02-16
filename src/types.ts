@@ -1,14 +1,20 @@
-export class Ok<T> {
-  constructor(public value: T) {}
+export interface Ok<T> {
+  kind: "Ok";
+  value: T;
 }
 
-export const ok = <T>(value: T): Ok<T> => new Ok(value);
+export const ok = <T>(value: T): Ok<T> => {
+  return { kind: "Ok", value };
+};
 
-export class Err<T> {
-  constructor(public value: T) {}
+export interface Err<T> {
+  kind: "Err";
+  value: T;
 }
 
-export const err = <T>(value: T): Err<T> => new Err(value);
+export const err = <T>(value: T): Err<T> => {
+  return { kind: "Err", value };
+};
 
 type KeysOfType<T, U> = { [K in keyof T]: T[K] extends U ? K : never }[keyof T];
 type RequiredKeys<T> = Exclude<KeysOfType<T, Exclude<T[keyof T], undefined>>, undefined>;

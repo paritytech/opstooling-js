@@ -8,7 +8,7 @@ import { Mutex } from "async-mutex";
 import { githubApiEndpoints } from "src/github/api";
 import { Logger } from "src/logger";
 import { delay } from "src/time";
-import { Err, Ok } from "src/types";
+import { Err, Ok, err, ok } from "src/types";
 
 const wasOctokitExtendedByApplication = Symbol();
 
@@ -273,10 +273,10 @@ export const getOctokit = (
           }
 
           try {
-            return new Ok(await request(options));
+            return ok(await request(options));
           } catch (error) {
             if (!(error instanceof RequestError)) {
-              return new Err(error);
+              return err(error);
             }
 
             const { status, message } = error;
@@ -286,7 +286,7 @@ export const getOctokit = (
               request is invalid and therefore there's no point in retrying it
               */
             if (!isApiRateLimitResponse && status >= 400 && status < 500) {
-              return new Err(error);
+              return err(error);
             }
 
             const { response } = error;
@@ -354,7 +354,7 @@ export const getOctokit = (
                   })();
 
             if (waitDuration === undefined) {
-              return new Err(error);
+              return err(error);
             }
 
             logger.info(`Waiting for ${waitDuration}ms until requests can be made again...`);
@@ -362,7 +362,7 @@ export const getOctokit = (
           }
         }
       } catch (error) {
-        return new Err(error);
+        return err(error);
       }
     });
 
@@ -372,7 +372,7 @@ export const getOctokit = (
     */
     requestDelay = delay(768);
 
-    if (result instanceof Err) {
+    if (result?.kind === "Err") {
       throw result.value;
     } else if (result === undefined) {
       throw new Error(`Unable to fetch GitHub response within ${triesCount} tries`);

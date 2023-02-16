@@ -8,7 +8,7 @@ import { Mutex } from "async-mutex";
 import { githubApiEndpoints } from "src/github/api";
 import { Logger } from "src/logger";
 import { delay } from "src/time";
-import { Err, Ok, err, ok } from "src/types";
+import { Err, err, Ok, ok } from "src/types";
 
 const wasOctokitExtendedByApplication = Symbol();
 

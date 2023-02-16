@@ -1,11 +1,21 @@
+const deprecateOkErr = () =>
+  console.warn(
+    "The usage of the Ok/Err pattern is deprecated because of the danger of mismatched 'instanceof' types in node_modules. " +
+      "Please use the regular try-catch pattern.",
+  );
+
 export class Ok<T> {
-  constructor(public value: T) {}
+  constructor(public value: T) {
+    deprecateOkErr();
+  }
 }
 
 export const ok = <T>(value: T): Ok<T> => new Ok(value);
 
 export class Err<T> {
-  constructor(public value: T) {}
+  constructor(public value: T) {
+    deprecateOkErr();
+  }
 }
 
 export const err = <T>(value: T): Err<T> => new Err(value);

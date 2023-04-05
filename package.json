@@ -6,7 +6,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "build": "tsc",
-    "build_watch": "tsc -w",
+    "build:watch": "tsc -w",
     "fix": "yarn fix:eslint '{*,**/*}.{cjs,js,ts}' && yarn fix:prettier '{*,**/*}.json'",
     "fix:eslint": "eslint --fix",
     "fix:prettier": "prettier --write",
@@ -45,7 +45,6 @@
     "typescript-transform-paths": "^3.4.4"
   },
   "dependencies": {
-    "@octokit/rest": "^18.12.0",
     "async-mutex": "^0.3.2",
     "commander": "^9.3.0",
     "deepdash": "^5.3.9",

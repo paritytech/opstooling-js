@@ -2,7 +2,6 @@ export * from "./comparison";
 export * from "./env";
 export * from "./error";
 export * from "./format";
-export * from "./github";
 export * from "./http";
 export * from "./logger";
 export * from "./net";

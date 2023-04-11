@@ -8,6 +8,7 @@
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc -w",
+    "lint": "eslint '{*,**/*}.{cjs,js,ts}' && prettier --check '{*,**/*}.json'",
     "fix": "yarn fix:eslint '{*,**/*}.{cjs,js,ts}' && yarn fix:prettier '{*,**/*}.json'",
     "fix:eslint": "eslint --fix",
     "fix:prettier": "prettier --write",

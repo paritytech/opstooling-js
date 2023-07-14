@@ -15,7 +15,8 @@
     "generate-types": "node ./dist/cli/main.js generate-types --schemas dist/schemas --out src/types/generated",
     "prepare": "ts-patch install -s",
     "test": "jest",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "docs": "typedoc src/index.ts"
   },
   "bin": {
     "opstooling-scripts": "./dist/cli/main.js"
@@ -34,6 +35,7 @@
     "dist"
   ],
   "devDependencies": {
+    "@eng-automation/js-style": "^2.0.0",
     "@resolritter/tsc-files": "^1.1.4",
     "@types/jest": "^27.5.1",
     "@types/lodash": "^4.14.182",
@@ -41,9 +43,9 @@
     "@types/node-fetch": "^2.6.1",
     "fastify": "^3.29.0",
     "jest": "^29.1.0",
-    "@eng-automation/js-style": "^2.0.0",
     "ts-jest": "^29.0.3",
     "ts-patch": "^2.0.2",
+    "typedoc": "^0.24.8",
     "typescript": "^4.6.2",
     "typescript-transform-paths": "^3.4.4"
   },

@@ -9,7 +9,7 @@ This repository hosts shared functionality for
 
 ![Docs deployed](https://github.com/paritytech/opstooling-js/actions/workflows/deploy-docs.yml/badge.svg)
 
-Find the docs in [paritytech.github.io/ostooling-js](https://paritytech.github.io/ostooling-js). They are deployed automatically.
+Find the docs in [paritytech.github.io/opstooling-js](https://paritytech.github.io/opstooling-js). They are deployed automatically.
 
 # Installation
 

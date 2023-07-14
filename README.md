@@ -5,13 +5,17 @@ This repository hosts shared functionality for
 
 ![GitHub Issue Sync](https://github.com/paritytech/opstooling-js/actions/workflows/github-issue-sync.yml/badge.svg)
 
+## Docs
+
+![Docs deployed](https://github.com/paritytech/opstooling-js/actions/workflows/deploy-docs.yml/badge.svg)
+
+Find the docs in [paritytech.github.io/ostooling-js](https://paritytech.github.io/ostooling-js). They are deployed automatically.
+
 # Installation
 
-Choose a [tag](https://github.com/paritytech/opstooling-js/tags) and then run
+Yarn: `yarn add @eng-automation/js`
 
-Yarn: `yarn add https://github.com/paritytech/opstooling-js#${TAG_NAME}`
-
-NPM: `npm install https://github.com/paritytech/opstooling-js-style#${TAG_NAME}`
+NPM: `npm install --save @eng-automation/js`
 
 # Release
 

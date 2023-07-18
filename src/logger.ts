@@ -1,4 +1,5 @@
 import type { FastifyLoggerInstance } from "fastify";
+import { Counter } from "prom-client";
 import { inspect } from "util";
 
 import { normalizeValue } from "./normalization";
@@ -24,7 +25,9 @@ export type LoggerOptions = {
   minLogLevel: LoggingLevels;
   impl: LoggingImplementation | Console;
   context?: Record<string, unknown>;
+  metricsCounter?: Counter<"level">;
 };
+
 export class Logger {
   constructor(public options: LoggerOptions) {}
 
@@ -60,6 +63,10 @@ export class Logger {
   }
 
   log<T = string>(level: LoggingLevels, item: unknown, description?: T, ...extra: unknown[]): undefined | (() => void) {
+    if (this.options.metricsCounter) {
+      this.options.metricsCounter.inc({ level });
+    }
+
     if (LoggingLevel[level] < LoggingLevel[this.options.minLogLevel]) {
       return;
     }

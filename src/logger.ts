@@ -60,10 +60,14 @@ export class Logger {
       adjustedContext[suggestedName] = value;
       currentContextKeys.push(suggestedName);
     }
-    return new Logger({
+    const result = new Logger({
       ...this.options,
       context: currentContextKeys.length ? { ...this.options.context, ...adjustedContext } : undefined,
     });
+
+    result.addSecretsToMask(...this.#secretsToMask);
+
+    return result;
   }
 
   log<T = string>(level: LoggingLevels, item: unknown, description?: T, ...extra: unknown[]): undefined | (() => void) {

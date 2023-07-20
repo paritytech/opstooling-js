@@ -1,8 +1,13 @@
-const deprecateOkErr = () =>
+let deprecateOkErrShown = false;
+
+const deprecateOkErr = () => {
+  if (deprecateOkErrShown) return;
   console.warn(
     "The usage of the Ok/Err pattern is deprecated because of the danger of mismatched 'instanceof' types in node_modules. " +
       "Please use the regular try-catch pattern.",
   );
+  deprecateOkErrShown = true;
+};
 
 /**
  * @deprecated

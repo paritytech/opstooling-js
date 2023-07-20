@@ -2,8 +2,6 @@ import type { FastifyLoggerInstance } from "fastify";
 import { Counter } from "prom-client";
 import { inspect } from "util";
 
-import { normalizeValue } from "./normalization";
-
 export type LoggingImplementation = {
   log: (...args: unknown[]) => void;
   error: (...args: unknown[]) => void;
@@ -29,7 +27,13 @@ export type LoggerOptions = {
 };
 
 export class Logger {
+  #secretsToMask: string[] = [];
+
   constructor(public options: LoggerOptions) {}
+
+  addSecretsToMask(...secrets: string[]): void {
+    this.#secretsToMask.push(...secrets);
+  }
 
   getFastifyLogger(): FastifyLoggerInstance {
     return {
@@ -98,23 +102,21 @@ export class Logger {
             level,
             name: this.options.name,
             context: this.options.context,
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            msg: normalizeValue(item, [], true),
-            description,
-            extra,
+            msg: this.fmt(item),
+            description: this.fmt(description),
+            extra: this.fmt(extra),
           }),
         );
         break;
       }
       case null: {
         const tag = `${level.toUpperCase()} (${this.options.name}):`;
-        const normalizedContext = normalizeValue(this.options.context);
         loggingFunction(
           tag,
-          ...(description === undefined ? [] : [description]),
-          ...(normalizedContext === undefined ? [] : ["~@ Context:", normalizedContext]),
-          ...(extra.length === 0 ? [] : ["~@ Extra:", normalizeValue(extra)]),
-          normalizeValue(item, [], true),
+          ...(description === undefined ? [] : [this.fmt(description)]),
+          ...(this.options.context === undefined ? [] : ["~@ Context:", this.fmt(this.options.context)]),
+          ...(extra.length === 0 ? [] : ["~@ Extra:", this.fmt(extra)]),
+          this.fmt(item),
         );
         break;
       }
@@ -127,7 +129,20 @@ export class Logger {
   }
 
   fmt(item: unknown): string {
-    return inspect(item, { showHidden: false, depth: null, maxArrayLength: null, sorted: true });
+    let formatted: string;
+
+    // util.inspect of strings will add another quotes around it, we don't need it for logger
+    if (typeof item === "string") {
+      formatted = item;
+    } else {
+      formatted = inspect(item, { showHidden: false, depth: null, maxArrayLength: null, sorted: true });
+    }
+
+    for (const secret of this.#secretsToMask) {
+      formatted = formatted.replaceAll(secret, "[MASKED]");
+    }
+
+    return formatted;
   }
 
   private loggerCallback(level: LoggingLevels) {

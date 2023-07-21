@@ -31,8 +31,12 @@ export class Logger {
 
   constructor(public options: LoggerOptions) {}
 
-  addSecretsToMask(...secrets: string[]): void {
-    this.#secretsToMask.push(...secrets);
+  addSecretsToMask(...secrets: (string | undefined)[]): void {
+    for (const value of secrets) {
+      if (value !== undefined && value !== "") {
+        this.#secretsToMask.push(value);
+      }
+    }
   }
 
   getFastifyLogger(): FastifyLoggerInstance {

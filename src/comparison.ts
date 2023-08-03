@@ -86,7 +86,7 @@ export const doValuesContainSameData = (v1: unknown, v2: unknown): boolean => {
 };
 
 /** Case insentive comparison of two strings.
- * If the characters have the same letter but different case it will return true
+ * If the characters have the same letters even if they have a different case it will return true
  * @example
  * caseInsensitiveEqual("hi", "HI") === true
  * caseInsensitiveEqual("hi", "hi") === true

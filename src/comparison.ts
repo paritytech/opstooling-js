@@ -84,3 +84,17 @@ export const doValuesContainSameData = (v1: unknown, v2: unknown): boolean => {
 
   return !isSomeKeyDifferent(v1, v2) && !isSomeKeyDifferent(v2, v1);
 };
+
+/** Case insentive comparison of two strings.
+ * If the characters have the same letter but different case it will return true
+ * @example
+ * caseInsensitiveEqual("hi", "HI") === true
+ * caseInsensitiveEqual("hi", "hi") === true
+ * caseInsensitiveEqual("hi", "HI") === true
+ * caseInsensitiveEqual("hi", "HI!") === false
+ * caseInsensitiveEqual("hí", "HI") === false
+ * caseInsensitiveEqual("hí", "HÍ") === true
+ * caseInsensitiveEqual("hII", "Hii") === true
+ */
+export const caseInsensitiveEqual = <T extends string>(a: T, b: T): boolean =>
+  a.localeCompare(b, undefined, { sensitivity: "accent" }) === 0;

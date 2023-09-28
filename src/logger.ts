@@ -1,5 +1,5 @@
 import type { FastifyLoggerInstance } from "fastify";
-import { Counter } from "prom-client";
+import type { Counter } from "prom-client";
 import { inspect } from "util";
 
 export type LoggingImplementation = {

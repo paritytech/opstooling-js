@@ -14,6 +14,10 @@
  *     getMetadataVersion: async () => (await api.rpc.state.getMetadata()).version.toString(),
  *     onMetadataChange: () => process.exit(1),
  *   },
+ *   runtime: {
+ *     getRuntimeVersionHash: async () => (await api.rpc.state.getRuntimeVersion()).hash.toString(),
+ *     onRuntimeChange: () => process.exit(1),
+ *   }
  *   log: (msg) => console.log(msg)
  * })
  */

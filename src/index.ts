@@ -6,6 +6,7 @@ export * from "./http";
 export * from "./logger";
 export * from "./net";
 export * from "./normalization";
+export * from "./runtimeRestarter"
 export * from "./shell";
 export * from "./time";
 export * from "./types";

@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       excludeClosed:
-        description: 'Exclude closed issues in the sync.'
+        description: "Exclude closed issues in the sync."
         type: boolean
         default: true
 
@@ -23,7 +23,7 @@ jobs:
           app_id: ${{ secrets.PROJECT_APP_ID }}
           private_key: ${{ secrets.PROJECT_APP_KEY }}
       - name: Sync issues
-        uses: paritytech/github-issue-sync@v0.3
+        uses: paritytech/github-issue-sync@v0.3.2
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PROJECT_TOKEN: ${{ steps.generate_token.outputs.token }}

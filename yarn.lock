@@ -526,14 +526,14 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@eng-automation/js-style@^2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@eng-automation/js-style/-/js-style-2.3.0.tgz#5910f60dfd409b6072672473adadcc0e8922e5e5"
-  integrity sha512-Z0P95u2kj2GBJ+2DSguJNZkPYiOoJgXYSTEQln0daCjGvKlav9GLREB70Y3ZDUUoLYi88Kgv8Ewa0yA0FamQCQ==
+"@eng-automation/js-style@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@eng-automation/js-style/-/js-style-2.3.1.tgz#279111cf0bbe27803fb4158677c844be9f9bc81a"
+  integrity sha512-4K0yEiobDwm0JGGURBJFtaC4u+E7PUGhUCbmhPCZVP7aCVJwEDX9c6F6Dx+xqFkMSxs1BYvAYzZ6QO7+R92heA==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^5.59.1"
     "@typescript-eslint/parser" "^5.59.1"
-    eslint "^8.47.0"
+    eslint "^8.56.0"
     eslint-config-prettier "^9.0.0"
     eslint-plugin-import "^2.27.5"
     eslint-plugin-jest "^26.5.3"
@@ -1147,10 +1147,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.30.tgz#2c6e8512acac70815e8176aa30c38025067880ef"
   integrity sha512-oNBIZjIqyHYP8VCNAV9uEytXVeXG2oR0w9lgAXro20eugRQfY002qr3CUl6BAe+Yf/z3CRjPdz27Pu6WWtuSRw==
 
-"@types/node@^20.12.7":
-  version "20.12.7"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.12.7.tgz#04080362fa3dd6c5822061aa3124f5c152cff384"
-  integrity sha512-wq0cICSkRLVaf3UGLMGItu/PtdY7oaXaI/RVU+xliKVOtRna3PRY57ZDfztpDL0n11vfymMUnXv8QwYCO7L1wg==
+"@types/node@^20.12.8":
+  version "20.12.8"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.12.8.tgz#35897bf2bfe3469847ab04634636de09552e8256"
+  integrity sha512-NU0rJLJnshZWdE/097cdCBbyW1h4hEg0xpovcoAQYHl8dnEyp/NAOiE45pvc+Bd1Dt+2r94v2eGFpQJ4R7g+2w==
   dependencies:
     undici-types "~5.26.4"
 
@@ -2173,7 +2173,7 @@ eslint-visitor-keys@^3.4.3:
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-3.4.3.tgz#0cd72fe8550e3c2eae156a96a4dddcd1c8ac5800"
   integrity sha512-wpc+LXeiyiisxPlEkUzU6svyS1frIO3Mgxj1fdy7Pm8Ygzguax2N3Fa/D/ag1WqbOprdI+uY6wMUl8/a2G+iag==
 
-eslint@^8.47.0:
+eslint@^8.56.0:
   version "8.57.0"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-8.57.0.tgz#c786a6fd0e0b68941aaf624596fb987089195668"
   integrity sha512-dZ6+mexnaTIbSBZWgou51U6OmzIhYM2VcNdtiTtI7qPNZm35Akpr0f6vtw3w1Kmn5PYo+tZVfh13WrhpS6oLqQ==
@@ -3396,10 +3396,10 @@ joi-to-typescript@^4.13.0:
   resolved "https://registry.yarnpkg.com/joi-to-typescript/-/joi-to-typescript-4.13.0.tgz#d2e7dae351c74ef6f8a84fe68b090109f63e0877"
   integrity sha512-ZE2K093Ea/lqQZIDJ0ZKxFXtAcF+ksbq06hsfau2DnM4Ri4j0ObVYWUEcHs9Iyia4VLEoAomwqkhcs5so32VXg==
 
-joi@^17.12.3:
-  version "17.12.3"
-  resolved "https://registry.yarnpkg.com/joi/-/joi-17.12.3.tgz#944646979cd3b460178547b12ba37aca8482f63d"
-  integrity sha512-2RRziagf555owrm9IRVtdKynOBeITiDpuZqIpgwqXShPncPKNiRQoiGsl/T8SQdq+8ugRzH2LqY67irr2y/d+g==
+joi@^17.13.1:
+  version "17.13.1"
+  resolved "https://registry.yarnpkg.com/joi/-/joi-17.13.1.tgz#9c7b53dc3b44dd9ae200255cc3b398874918a6ca"
+  integrity sha512-vaBlIKCyo4FCUtCm7Eu4QZd/q02bWcxfUO6YSXAZOWF6gzcLBeba8kwotUdYJjDLW8Cz8RywsSOqiNJZW0mNvg==
   dependencies:
     "@hapi/hoek" "^9.3.0"
     "@hapi/topo" "^5.1.0"

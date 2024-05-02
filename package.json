@@ -35,11 +35,11 @@
     "dist"
   ],
   "devDependencies": {
-    "@eng-automation/js-style": "^2.3.0",
+    "@eng-automation/js-style": "^2.3.1",
     "@resolritter/tsc-files": "^1.1.4",
     "@types/jest": "^29.5.12",
     "@types/lodash": "^4.17.0",
-    "@types/node": "^20.12.7",
+    "@types/node": "^20.12.8",
     "@types/node-fetch": "^2.6.11",
     "fastify": "^4.26.2",
     "jest": "^29.7.0",
@@ -54,7 +54,7 @@
     "async-mutex": "^0.5.0",
     "commander": "^12.0.0",
     "deepdash": "^5.3.9",
-    "joi": "^17.12.3",
+    "joi": "^17.13.1",
     "joi-to-typescript": "^4.13.0",
     "lodash": "^4.17.21",
     "node-fetch": "^3.3.2"

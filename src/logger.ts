@@ -1,4 +1,4 @@
-import type { FastifyLoggerInstance } from "fastify";
+import type { FastifyBaseLogger } from "fastify";
 import type { Counter } from "prom-client";
 import { inspect } from "util";
 
@@ -14,6 +14,7 @@ export enum LoggingLevel {
   warn,
   error,
   fatal,
+  silent,
 }
 
 export type LoggingLevels = keyof typeof LoggingLevel;
@@ -39,13 +40,15 @@ export class Logger {
     }
   }
 
-  getFastifyLogger(): FastifyLoggerInstance {
+  getFastifyLogger(): FastifyBaseLogger {
     return {
       ...this,
       debug: this.loggerCallback("debug"),
       trace: this.loggerCallback("trace"),
       fatal: this.loggerCallback("fatal"),
+      silent: this.loggerCallback("silent"),
       child: (context: Record<string, unknown>) => this.child(context).getFastifyLogger(),
+      level: "trace",
     };
   }
 
@@ -95,6 +98,9 @@ export class Logger {
         case "error": {
           return this.options.impl.error;
         }
+        case "silent":
+          // We don't log in silent
+          return (_: unknown) => {};
         default: {
           const exhaustivenessCheck: never = level;
           // eslint-disable-next-line @typescript-eslint/restrict-template-expressions

@@ -1,5 +1,4 @@
 import Joi from "joi";
-import fetch, { RequestInfo, RequestInit } from "node-fetch";
 
 import { validate } from "./validation";
 
@@ -9,7 +8,7 @@ export type ValidatedFetchParams = {
 };
 
 export const validatedFetch = async <T>(
-  url: RequestInfo,
+  url: Request,
   schema: Joi.Schema<T>,
   { decoding, init }: ValidatedFetchParams = {},
 ): Promise<T> => {

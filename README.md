@@ -47,8 +47,8 @@ We utilize [joi-to-typescript](https://www.npmjs.com/package/joi-to-typescript) 
 ```ts
 import { validate } from "opstooling-js"
 
-import { YourType } from "src/types"
-import { YourTypeSchema } from "src/schemas/YourTypeSchema"
+import { YourType } from "#src/types"
+import { YourTypeSchema } from "#src/schemas/YourTypeSchema"
 
 const input: unknown = getSomeData()
 

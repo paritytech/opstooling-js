@@ -8,7 +8,7 @@ export type ValidatedFetchParams = {
 };
 
 export const validatedFetch = async <T>(
-  url: Request,
+  url: string | URL | Request,
   schema: Joi.Schema<T>,
   { decoding, init }: ValidatedFetchParams = {},
 ): Promise<T> => {

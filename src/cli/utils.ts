@@ -1,7 +1,6 @@
+import { displayError } from "#src/error";
+import { Logger } from "#src/logger";
 import { program } from "commander";
-
-import { displayError } from "src/error";
-import { Logger } from "src/logger";
 
 export type CliContext = { logger: Logger };
 

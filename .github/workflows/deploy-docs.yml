@@ -21,8 +21,8 @@ jobs:
       - name: Install node
         uses: actions/setup-node@v4
         with:
-          node-version: 18
-      - run: yarn install --frozen-lockfile
+          node-version: 22
+      - run: yarn install --immutable
       - name: Generate docs
         run: yarn run docs
       - name: Setup Pages

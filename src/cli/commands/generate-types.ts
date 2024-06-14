@@ -1,8 +1,7 @@
+import { runMain } from "#src/cli/utils";
 import { execFileSync } from "child_process";
 import { program } from "commander";
 import { convertFromDirectory } from "joi-to-typescript";
-
-import { runMain } from "src/cli/utils";
 
 program
   .command("generate-types")

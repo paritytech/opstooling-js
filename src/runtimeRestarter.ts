@@ -68,9 +68,21 @@ export function runtimeRestarter(opts: {
     }
   };
 
+  const tryRunChecks = async () => {
+    try {
+      await runChecks();
+    } catch (e) {
+      if (e instanceof Error && e.message.includes("WebSocket is not connected")) {
+        log?.("Failed to check for metadata/runtime changes due to disconnected websocket. Will continue trying.");
+        return;
+      }
+      throw e;
+    }
+  };
+
   const checkIntervalSeconds = opts.checkIntervalSeconds ?? 600;
   const interval = setInterval(() => {
-    void runChecks();
+    void tryRunChecks();
   }, checkIntervalSeconds * 1000);
 
   return () => clearInterval(interval);
